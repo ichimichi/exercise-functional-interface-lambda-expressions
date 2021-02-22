@@ -12,7 +12,7 @@ public class LambdaExercise {
         System.out.println("--sorting countries by name");
         sortCountriesByName();
         displayCountries();
-        System.out.println("--sorting countries by length");
+        System.out.println("--sorting countries by length followed by alphabetically");
         sortCountriesByLength();
         displayCountries();
         System.out.println("--removing countries");
@@ -26,11 +26,13 @@ public class LambdaExercise {
         countries.add("France");
         countries.add("Philippines");
         countries.add("India");
+        countries.add("Indonesia");
         countryCapitals.put("China", "Beijing");
         countryCapitals.put("Egypt", "Cairo");
         countryCapitals.put("France", "Paris");
         countryCapitals.put("Philippines", "Manila");
         countryCapitals.put("India", "Delhi");
+        countryCapitals.put("Indonesia", "Jakarta");
     }
 
     public static void displayCountries() {
@@ -48,7 +50,9 @@ public class LambdaExercise {
 
     public static void sortCountriesByLength() {
         Comparator<String> lengthComparatorDesc = (String s1, String s2) -> ((int) s2.length() - s1.length());
-        Collections.sort(countries, lengthComparatorDesc);
+        Comparator<String> nameComparator = (String s1, String s2) -> ((int) s1.compareTo(s2));
+
+        Collections.sort(countries, lengthComparatorDesc.thenComparing(nameComparator));
     }
 
     public static void removeCountry(String name) {
